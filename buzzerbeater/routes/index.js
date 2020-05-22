@@ -1,5 +1,9 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
+const utils = require('../module/utils/utils');
+const responseMessage = require('../module/utils/responseMessage');
+const statusCode = require('../module/utils/statusCode');
+require('dotenv').config();
 
 // 팀 목록 출력
 router.get('/team', async(req, res) => {
