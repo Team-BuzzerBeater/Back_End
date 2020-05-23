@@ -1,4 +1,3 @@
-// authUtil.js
 const Utils = {
     successTrue: (statusCode, message, data) => {
         return {
