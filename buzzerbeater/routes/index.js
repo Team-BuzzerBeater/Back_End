@@ -5,9 +5,12 @@ const responseMessage = require('../module/utils/responseMessage');
 const statusCode = require('../module/utils/statusCode');
 require('dotenv').config();
 
+router.use('/printXg', require('./printXg'));
+router.use('/addXg', require('./addXg'));
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.send('its buzzerbeater');
 });
 
 module.exports = router;
