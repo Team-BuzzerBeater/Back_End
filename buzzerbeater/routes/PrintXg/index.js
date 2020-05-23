@@ -9,7 +9,12 @@ const PrintXg = require('../../model/printXg')
 
 router.get('/teamList', async(req, res) => {
     var result = await PrintXg.teamList();
-    console.log(result);
+    res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('teamList'), result));
+});
+
+router.get('/:teamIdx/player', async(req, res) => {
+    const teamIdx = req.params.teamIdx;
+    var result = await PrintXg.player(teamIdx);
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('teamList'), result));
 });
 
