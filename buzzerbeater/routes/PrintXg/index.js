@@ -12,6 +12,16 @@ router.get('/teamList', async(req, res) => {
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('teamList'), result));
 });
 
+router.get('/playerList', async(req, res) => {
+    var result = await PrintXg.playerList();
+
+    if(result.length == 0){
+        res.status(statusCode.OK).send(utils.successFalse(statusCode.NO_CONTENT, responseMessage.X_READ_ALL_SUCCESS('playerList')));
+        return;
+    }
+    res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('playerList'), result));
+})
+
 router.get('/:teamIdx/player', async(req, res) => {
     const teamIdx = req.params.teamIdx;
     var result = await PrintXg.player(teamIdx);

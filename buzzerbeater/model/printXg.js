@@ -6,6 +6,11 @@ module.exports = {
         return result;
     },
 
+    playerList : async() => {
+        var result = await pool.queryParam_None(`SELECT playerIdx, playerName, teamIdx From player`);
+        return result;
+    },
+
     player : async(teamIdx) => {
         var result = await pool.queryParam_None(`SELECT playerIdx, playerName, teamIdx From player WHERE teamIdx = ${teamIdx}`)
         return result;
