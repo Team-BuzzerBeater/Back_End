@@ -28,4 +28,15 @@ router.get('/:teamIdx/player', async(req, res) => {
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('teamList'), result));
 });
 
+router.get('/shooting/:playerIdx', async(req, res) => {
+    const playerIdx = req.params.playerIdx;
+    var result = await PrintXg.shooting(playerIdx);
+
+    if(!result)
+        res.status(statusCode.BAD_REQUEST).send(utils.successFalse(statusCode.BAD_REQUEST, responseMessage.X_READ_ALL_FAIL('shootings')));
+        console.log("Failed");    
+
+    res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('shootings'), result));
+});
+
 module.exports = router;
