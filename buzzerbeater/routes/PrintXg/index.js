@@ -32,9 +32,10 @@ router.get('/shooting/:playerIdx', async(req, res) => {
     const playerIdx = req.params.playerIdx;
     var result = await PrintXg.shooting(playerIdx);
 
-    if(!result)
+    if(!result || result.length == 0) {
         res.status(statusCode.BAD_REQUEST).send(utils.successFalse(statusCode.BAD_REQUEST, responseMessage.X_READ_ALL_FAIL('shootings')));
-        console.log("Failed");    
+        return;
+    }
 
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('shootings'), result));
 });
