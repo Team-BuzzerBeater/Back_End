@@ -9,13 +9,18 @@ const PrintXg = require('../../model/printXg')
 
 router.get('/teamList', async(req, res) => {
     var result = await PrintXg.teamList();
+
+    if(!result || result.length == 0){
+        res.status(statusCode.OK).send(utils.successFalse(statusCode.NO_CONTENT, responseMessage.X_READ_ALL_SUCCESS('teamList')));
+        return;
+    }
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('teamList'), result));
 });
 
 router.get('/playerList', async(req, res) => {
     var result = await PrintXg.playerList();
 
-    if(result.length == 0){
+    if(!result || result.length == 0){
         res.status(statusCode.OK).send(utils.successFalse(statusCode.NO_CONTENT, responseMessage.X_READ_ALL_SUCCESS('playerList')));
         return;
     }
@@ -25,6 +30,11 @@ router.get('/playerList', async(req, res) => {
 router.get('/:teamIdx/player', async(req, res) => {
     const teamIdx = req.params.teamIdx;
     var result = await PrintXg.player(teamIdx);
+
+    if(!result || result.length == 0) {
+        res.status(statusCode.BAD_REQUEST).send(utils.successFalse(statusCode.BAD_REQUEST, responseMessage.X_READ_ALL_FAIL('teams player')));
+        return;
+    }
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('teamList'), result));
 });
 
@@ -36,8 +46,19 @@ router.get('/shooting/:playerIdx', async(req, res) => {
         res.status(statusCode.BAD_REQUEST).send(utils.successFalse(statusCode.BAD_REQUEST, responseMessage.X_READ_ALL_FAIL('shootings')));
         return;
     }
-
     res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('shootings'), result));
 });
+
+router.get('/profile/:playerIdx', async(req, res) => {
+    const playerIdx = req.params.playerIdx;
+    var result = await PrintXg.profile(playerIdx);
+
+    
+    if(!result || result.length == 0) {
+        res.status(statusCode.BAD_REQUEST).send(utils.successFalse(statusCode.BAD_REQUEST, responseMessage.X_READ_ALL_FAIL('profile')));
+        return;
+    }
+    res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, responseMessage.X_READ_ALL_SUCCESS('profile'), result));
+})
 
 module.exports = router;
