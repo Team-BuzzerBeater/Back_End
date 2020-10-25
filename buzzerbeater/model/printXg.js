@@ -18,7 +18,7 @@ module.exports = {
 
     shooting : async(playerIdx) => {
         // var playerIdx = await pool.queryParam_None(`SELECT playerIdx FROM player WHERE playerName = ${playerName}`)
-        var result = await pool.queryParam_None(`SELECT shootIdx, positionX, positionY, xG, ourTeam, enemyTeam, isHome, result FROM shootings WHERE playerIdx = ${playerIdx}`)
+        var result = await pool.queryParam_None(`SELECT shootIdx, positionX, positionY, xG, ourTeam, enemyTeam, isHome, result, round FROM shootings WHERE playerIdx = ${playerIdx}`)
         return result;
     },
 
