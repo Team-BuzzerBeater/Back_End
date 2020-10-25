@@ -23,7 +23,7 @@ module.exports = {
     },
 
     profile : async(playerIdx) => {
-        var result = await pool.queryParam_None(`SELECT playerName, goals, teamIdx, hight, weight, birth FROM player WHERE playerIdx = ${playerIdx}`)
+        var result = await pool.queryParam_None(`SELECT playerName, goals, teamIdx, height, weight, birth FROM player WHERE playerIdx = ${playerIdx}`)
         return result;
     }
 };
