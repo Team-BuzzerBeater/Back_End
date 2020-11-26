@@ -2,12 +2,12 @@ const pool = require('../module/db/pool');
 
 module.exports = {
     teamList : async() => {
-        var result = await pool.queryParam_None(`SELECT teamIdx, teamName FROM team`);
+        var result = await pool.queryParam_None(`SELECT teamIdx, teamName FROM team WHERE useState = 1`);
         return result;
     },
 
     playerList : async() => {
-        var result = await pool.queryParam_None(`SELECT playerIdx, playerName, goals, teamIdx FROM player`);
+        var result = await pool.queryParam_None(`SELECT playerIdx, playerName, goals, teamIdx FROM player WHERE useState = 1`);
         return result;
     },
 
